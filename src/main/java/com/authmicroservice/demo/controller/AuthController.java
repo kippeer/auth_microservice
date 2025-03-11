@@ -1,11 +1,9 @@
 package com.authmicroservice.demo.controller;
 
 import com.authmicroservice.demo.service.UserService;
+import com.authmicroservice.demo.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
@@ -23,6 +21,18 @@ public class AuthController {
             return token;  // Retorna o token gerado
         } else {
             return "Credenciais inválidas!";  // Retorna uma mensagem de erro se as credenciais forem inválidas
+        }
+    }
+
+    // Endpoint para registro de usuário
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public String register(@RequestBody User user) {
+        boolean userCreated = userService.registerUser(user);
+
+        if (userCreated) {
+            return "Usuário registrado com sucesso!";
+        } else {
+            return "Erro ao registrar o usuário!";
         }
     }
 }

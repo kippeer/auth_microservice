@@ -2,8 +2,8 @@ package com.authmicroservice.demo.service;
 
 import com.authmicroservice.demo.model.User;
 import com.authmicroservice.demo.repository.UserRepository;
-import com.authmicroservice.demo.security.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -12,18 +12,27 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private JwtTokenProvider jwtTokenProvider;
+    private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-    // Método para autenticar e gerar o token
+    // Método para autenticar o usuário e gerar o token
     public String authenticateUser(String username, String password) {
-        // Aqui, você pode fazer a validação de senha, por exemplo
-        User user = userRepository.findById(username).orElse(null);
+        // Implementar autenticação (verificação de credenciais)
+        return null;
+    }
 
-        if (user != null && user.getPassword().equals(password)) {
-            return jwtTokenProvider.generateToken(username);  // Gerar o token se as credenciais forem válidas
-        } else {
-            return null;  // Ou lançar uma exceção, caso as credenciais sejam inválidas
+    // Método para registrar um novo usuário
+    public boolean registerUser(User user) {
+        // Verificar se o nome de usuário já existe
+        if (userRepository.existsByUsername(user.getUsername())) {
+            return false; // Retorna falso se o nome de usuário já existir
         }
+
+        // Criptografar a senha antes de salvar
+        String encryptedPassword = passwordEncoder.encode(user.getPassword());
+        user.setPassword(encryptedPassword);
+
+        // Salvar o novo usuário no banco de dados
+        userRepository.save(user);
+        return true;
     }
 }
