@@ -44,6 +44,12 @@ spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
 spring.jpa.hibernate.ddl-auto=update
 ```
 
+# JWT Config
+app.jwtSecret=mySecretKeyNeedsToBeVeryLongAndHardToGuessForSecurity
+app.jwtExpirationMs=86400000
+jwt.header=Authorization
+jwt.prefix=Bearer
+
 Se quiser rodar o banco via **Docker**, utilize o comando:
 
 ```sh
@@ -57,7 +63,7 @@ docker run --name auth-db -e POSTGRES_USER=admin -e POSTGRES_PASSWORD=admin -e P
 ### 📥 Clonar o repositório
 
 ```sh
-git clone https://github.com/seu-usuario/auth-microservice.git
+git clone https://github.com/kippeer/auth_microservice.git
 cd auth-microservice
 ```
 
@@ -73,7 +79,7 @@ Ou se estiver usando **Maven** instalado:
 mvn spring-boot:run
 ```
 
-A API estará disponível em: `http://localhost:8083`
+A API estará disponível em: `http://localhost:8081`
 
 ---
 
@@ -124,6 +130,15 @@ curl -X POST "http://localhost:8083/api/auth/login" \
 -H "Content-Type: application/json" \
 -d '{"username": "admin", "password": "123456"}'
 ```
+Exemplo de registro
+{
+  "username": "novo_user",
+  "email": "novo@example.com",
+  "name": "Novo Usuário",
+  "password": "123456"
+}
+
+
 
 ---
 
@@ -155,5 +170,5 @@ Se quiser contribuir:
 
 ---
 
-👨‍💻 Desenvolvido por [Seu Nome](https://github.com/seu-usuario)
+👨‍💻 Desenvolvido por [Fabio Tessaro](https://github.com/kippeer)
 
