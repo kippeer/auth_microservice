@@ -1,7 +1,7 @@
 package com.authmicroservice.demo.repository;
 
 
-import com.example.security.models.User;
+import com.authmicroservice.demo.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

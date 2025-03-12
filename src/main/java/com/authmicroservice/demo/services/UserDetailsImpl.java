@@ -1,7 +1,6 @@
-package com.authmicroservice.demo.service;
+package com.authmicroservice.demo.services;
 
-
-import com.example.security.models.User;
+import com.authmicroservice.demo.models.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -56,6 +55,11 @@ public class UserDetailsImpl implements UserDetails {
     }
 
     @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
     public boolean isAccountNonExpired() {
         return true;
     }
@@ -81,5 +85,9 @@ public class UserDetailsImpl implements UserDetails {
         if (o == null || getClass() != o.getClass()) return false;
         UserDetailsImpl user = (UserDetailsImpl) o;
         return Objects.equals(id, user.id);
+    }
+
+    public String getEmail() {
+        return email;
     }
 }

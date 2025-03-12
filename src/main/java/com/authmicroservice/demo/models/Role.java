@@ -1,4 +1,4 @@
-package com.authmicroservice.demo.model;
+package com.authmicroservice.demo.models;
 
 import com.authmicroservice.demo.Enums.ERole;
 import jakarta.persistence.*;

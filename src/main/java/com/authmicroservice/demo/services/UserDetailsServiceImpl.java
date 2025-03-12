@@ -1,9 +1,10 @@
-package com.authmicroservice.demo.service;
+package com.authmicroservice.demo.services;
 
 
 
-import com.example.security.models.User;
-import com.example.security.repository.UserRepository;
+import com.authmicroservice.demo.models.User;
+import com.authmicroservice.demo.repository.UserRepository;
+
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

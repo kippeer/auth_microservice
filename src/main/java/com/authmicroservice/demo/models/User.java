@@ -1,9 +1,9 @@
-package com.authmicroservice.demo.model;
+package com.authmicroservice.demo.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
-
-
 
 import java.util.HashSet;
 import java.util.Set;
@@ -33,4 +33,12 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
+
+    // Add this constructor
+    public User(String name, String email, String password) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.roles = new HashSet<>(); // Default empty roles
+    }
 }

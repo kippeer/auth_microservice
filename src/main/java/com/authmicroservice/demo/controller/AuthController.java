@@ -2,15 +2,19 @@ package com.authmicroservice.demo.controller;
 
 
 
-import com.example.security.jwt.JwtUtils;
-import com.example.security.models.*;
-import com.example.security.payload.request.LoginRequest;
-import com.example.security.payload.request.SignupRequest;
-import com.example.security.payload.response.JwtResponse;
-import com.example.security.payload.response.MessageResponse;
-import com.example.security.repository.RoleRepository;
-import com.example.security.repository.UserRepository;
-import com.example.security.services.UserDetailsImpl;
+import com.authmicroservice.demo.Enums.ERole;
+
+import com.authmicroservice.demo.models.*;
+
+import com.authmicroservice.demo.payload.JwtResponse;
+import com.authmicroservice.demo.payload.LoginRequest;
+import com.authmicroservice.demo.payload.MessageResponse;
+import com.authmicroservice.demo.payload.SignupRequest;
+import com.authmicroservice.demo.repository.RoleRepository;
+import com.authmicroservice.demo.repository.UserRepository;
+import com.authmicroservice.demo.security.JwtUtils;
+import com.authmicroservice.demo.services.UserDetailsImpl;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -20,7 +24,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -73,6 +77,7 @@ public class AuthController {
                     .body(new MessageResponse("Error: Email is already in use!"));
         }
 
+        // Create new user's account
         User user = new User(signUpRequest.getName(),
                 signUpRequest.getEmail(),
                 encoder.encode(signUpRequest.getPassword()));
@@ -87,4 +92,5 @@ public class AuthController {
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
+
 }

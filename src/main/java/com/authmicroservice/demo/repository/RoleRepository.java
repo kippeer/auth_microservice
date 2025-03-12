@@ -1,8 +1,8 @@
 package com.authmicroservice.demo.repository;
 
 
-import com.example.security.models.ERole;
-import com.example.security.models.Role;
+import com.authmicroservice.demo.Enums.ERole;
+import com.authmicroservice.demo.models.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
