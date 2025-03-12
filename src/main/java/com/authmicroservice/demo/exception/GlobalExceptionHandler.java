@@ -44,9 +44,11 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleGlobalException(Exception ex) {
+        ex.printStackTrace(); // Isso vai imprimir o erro completo no console
         ErrorResponse errorResponse = new ErrorResponse(
                 HttpStatus.INTERNAL_SERVER_ERROR.value(),
-                "An unexpected error occurred"
+                "An unexpected error occurred",
+                Map.of("error", ex.getMessage()) // Adiciona detalhes ao JSON de erro
         );
         return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }

@@ -33,7 +33,7 @@ public class SecurityConfig {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/register","/api/auth/**").permitAll() // Permite o Swagger sem autenticação
+                        .requestMatchers("/api/auth/register","/api/auth/**","/h2-console/**").permitAll() // Permite o Swagger sem autenticação
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
