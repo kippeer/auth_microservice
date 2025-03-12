@@ -1,15 +1,15 @@
-
 package com.authmicroservice.demo.service;
-import com.authmicroservice.demo.dto.AuthRequest;  // Corrigido
-import com.authmicroservice.demo.dto.AuthResponse;  // Corrigido
-import com.authmicroservice.demo.dto.UserDto;  // Corrigido
-import com.authmicroservice.demo.entity.Role;  // Corrigido
-import com.authmicroservice.demo.entity.User;  // Corrigido
-import com.authmicroservice.demo.exception.InvalidCredentialsException;  // Corrigido
-import com.authmicroservice.demo.exception.ResourceNotFoundException;  // Corrigido
-import com.authmicroservice.demo.repository.RoleRepository;  // Corrigido
-import com.authmicroservice.demo.repository.UserRepository;  // Corrigido
-import com.authmicroservice.demo.security.JwtTokenProvider;  // Corrigido
+
+import com.authmicroservice.demo.dto.AuthRequest;
+import com.authmicroservice.demo.dto.AuthResponse;
+import com.authmicroservice.demo.dto.UserDto;
+import com.authmicroservice.demo.entity.Role;
+import com.authmicroservice.demo.entity.User;
+import com.authmicroservice.demo.exception.InvalidCredentialsException;
+import com.authmicroservice.demo.exception.ResourceNotFoundException;
+import com.authmicroservice.demo.repository.RoleRepository;
+import com.authmicroservice.demo.repository.UserRepository;
+import com.authmicroservice.demo.security.JwtTokenProvider;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -20,8 +20,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -61,20 +59,21 @@ public class AuthServiceImpl implements AuthService {
             throw new InvalidCredentialsException("Email is already in use");
         }
 
-        // Create user
+        // Criar usuário
         User user = new User();
         user.setUsername(registerRequest.getUsername());
         user.setEmail(registerRequest.getEmail());
+        user.setName(registerRequest.getName()); // ✅ Adicionando o campo 'name'
         user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
 
-        // Assign ROLE_USER by default
-        Role userRole = roleRepository.findByName("USER")
+        // Atribuir ROLE_USER por padrão
+        Role userRole = roleRepository.findByName("ROLE_USER")
                 .orElseThrow(() -> new ResourceNotFoundException("Error: Role not found."));
         user.setRoles(Collections.singleton(userRole));
 
         User savedUser = userRepository.save(user);
 
-        // Authenticate the new user
+        // Autenticar o novo usuário
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         registerRequest.getUsername(),
@@ -88,4 +87,3 @@ public class AuthServiceImpl implements AuthService {
         return new AuthResponse(jwt, "Bearer", savedUser.getId(), savedUser.getUsername());
     }
 }
-

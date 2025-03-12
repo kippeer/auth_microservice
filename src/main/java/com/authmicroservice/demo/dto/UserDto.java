@@ -9,13 +9,16 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Set;
-
 @Getter
 @Setter
 public class UserDto {
     @NotBlank
     @Size(min = 3, max = 50)
     private String username;
+
+    @NotBlank
+    @Size(min = 3, max = 50)  // Adicionando name
+    private String name;
 
     @NotBlank
     @Size(max = 100)
@@ -28,4 +31,3 @@ public class UserDto {
 
     private Set<String> roles;
 }
-

@@ -27,6 +27,9 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    @Column(nullable = false)  // ✅ Adicionado campo 'name'
+    private String name;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_roles",
@@ -37,4 +40,3 @@ public class User {
 
     private boolean enabled = true;
 }
-
