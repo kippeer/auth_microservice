@@ -1,6 +1,4 @@
-
-
-		<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
@@ -59,22 +57,13 @@
 			<scope>runtime</scope>
 		</dependency>
 
-		<!-- Database -->
+		<!-- PostgreSQL Dependency -->
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<version>42.5.0</version> <!-- Verifique se essa versão é a mais recente -->
 			<scope>runtime</scope>
 		</dependency>
-
-		<!-- For production, use PostgreSQL or MySQL -->
-		<!--
-        <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        -->
 
 		<!-- Lombok for reducing boilerplate code -->
 		<dependency>
@@ -83,7 +72,7 @@
 			<optional>true</optional>
 		</dependency>
 
-		<!-- Testing -->
+		<!-- Testing Dependencies -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -112,4 +101,5 @@
 			</plugin>
 		</plugins>
 	</build>
+
 </project>
